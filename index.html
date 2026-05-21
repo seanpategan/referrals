@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amazon Search">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>Amazon Search</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #131921;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: #131921;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #3a4553;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #FF9900;
+      letter-spacing: -1px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .tagline {
+      color: #ccc;
+      font-size: 14px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .search-form {
+      display: flex;
+      width: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 14px 16px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      background: #fff;
+    }
+
+    .search-btn {
+      background: #FF9900;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+
+    .search-btn:hover { background: #e68a00; }
+
+    .search-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .popup-overlay.hidden { display: none; }
+
+    .popup {
+      background: #fff;
+      border-radius: 8px;
+      padding: 32px 28px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .popup h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #131921;
+    }
+
+    .popup p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .popup input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      outline: none;
+    }
+
+    .popup input:focus { border-color: #FF9900; }
+
+    .popup button {
+      width: 100%;
+      padding: 12px;
+      background: #FF9900;
+      color: #131921;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .popup button:hover { background: #e68a00; }
+
+    .popup .error {
+      color: #c0392b;
+      font-size: 13px;
+      margin-top: -8px;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 16px;
+      color: #555;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // ─── CONFIG ─────────────────────────────────────────────────────────────────
+  // To create a company build: set demo to false and fill in referralTag.
+  const CONFIG = {
+    demo: true,
+    referralTag: "",
+    companyName: "Amazon Search",
+    primaryColor: "#FF9900"
+  };
+  // ────────────────────────────────────────────────────────────────────────────
+
+  function getTag() {
+    if (!CONFIG.demo) return CONFIG.referralTag;
+    return localStorage.getItem("referralTag") || "";
+  }
+
+  function needsPopup() {
+    return CONFIG.demo && !localStorage.getItem("referralTag");
+  }
+</script>
+
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup">
+    <h2>Welcome</h2>
+    <p>Enter your Amazon Associates referral tag to get started.</p>
+    <input type="text" id="tag-input" placeholder="e.g. yourname-20" autocomplete="off">
+    <div class="error" id="tag-error">Please enter a valid tag (e.g. yourname-20)</div>
+    <button onclick="saveTag()">Start Shopping</button>
+  </div>
+</div>
+
+<header>
+  <div class="logo" id="logo">amazon search</div>
+</header>
+
+<main>
+  <p class="tagline" id="tagline">Search Amazon — referral link applied automatically</p>
+  <form class="search-form" onsubmit="doSearch(event)">
+    <input class="search-input" type="text" id="search-input"
+           placeholder="Search Amazon..." autocomplete="off" autofocus>
+    <button class="search-btn" type="submit" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#131921" stroke-width="2.5" stroke-linecap="round">
+        <circle cx="11" cy="11" r="6"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+    </button>
+  </form>
+</main>
+
+<footer>
+  As an Amazon Associate, we earn from qualifying purchases.
+</footer>
+
+<script>
+  // Apply branding
+  document.title = CONFIG.companyName;
+  document.getElementById("logo").textContent = CONFIG.companyName.toLowerCase();
+  document.querySelector('meta[name="apple-mobile-web-app-title"]')
+    .setAttribute("content", CONFIG.companyName);
+
+  // Apply primary color overrides
+  const style = document.createElement("style");
+  style.textContent = `
+    .search-btn { background: ${CONFIG.primaryColor} !important; }
+    .search-btn:hover { filter: brightness(0.9); }
+    .logo { color: ${CONFIG.primaryColor} !important; }
+    .popup input:focus { border-color: ${CONFIG.primaryColor} !important; }
+    .popup button { background: ${CONFIG.primaryColor} !important; }
+  `;
+  document.head.appendChild(style);
+
+  // Show or hide popup
+  const overlay = document.getElementById("popup-overlay");
+  if (!needsPopup()) overlay.classList.add("hidden");
+
+  function saveTag() {
+    const val = document.getElementById("tag-input").value.trim();
+    const errorEl = document.getElementById("tag-error");
+    if (!val || !/^[a-zA-Z0-9-]+-\d+$/.test(val)) {
+      errorEl.style.display = "block";
+      return;
+    }
+    errorEl.style.display = "none";
+    localStorage.setItem("referralTag", val);
+    overlay.classList.add("hidden");
+    document.getElementById("search-input").focus();
+  }
+
+  document.getElementById("tag-input").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") saveTag();
+  });
+
+  function doSearch(e) {
+    e.preventDefault();
+    const query = document.getElementById("search-input").value.trim();
+    if (!query) return;
+    const tag = getTag();
+    const url = "https://www.amazon.com/s?" +
+      "k=" + encodeURIComponent(query) +
+      (tag ? "&tag=" + encodeURIComponent(tag) : "");
+    window.location.href = url;
+  }
+</script>
+
+</body>
+</html>
