@@ -6,13 +6,13 @@ A lightweight web app that lets you search Amazon with your referral tag automat
 
 Type a search query, hit enter, and you land on Amazon's results page with your Associates tag already in the URL.
 
-**Demo mode** prompts for a referral tag on first visit and remembers it. **Company mode** has the tag hardcoded — no prompt, just search.
+**Demo mode** prompts for a referral tag on first visit and remembers it. **Company mode** has the tag hardcoded: no prompt, just search.
 
 ## Files
 
-- **`index.html`** — the entire app. Edit the `CONFIG` block at the top to switch between demo and company mode, set your referral tag, and customize branding.
-- **`manifest.json`** — enables "Add to Home Screen" on iOS and Android so the app opens like a native app.
-- **`icon.svg`** — the homescreen icon.
+- **`index.html`**: the entire app. Edit the `CONFIG` block at the top to switch between demo and company mode, set your referral tag, and customize branding.
+- **`manifest.json`**: enables "Add to Home Screen" on iOS and Android so the app opens like a native app.
+- **`icon.svg`**: the homescreen icon.
 
 ## Creating a company build
 
