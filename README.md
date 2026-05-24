@@ -1,4 +1,4 @@
-# Amazon Referral PWA
+# Amazon Referral Web App
 
 A lightweight web app that lets you search Amazon with your referral tag automatically applied. Pin it to your phone's homescreen for instant access.
 
