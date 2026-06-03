@@ -3,26 +3,20 @@
   "name": "Amazon Referral Tag",
   "version": "1.0",
   "description": "Automatically applies your Amazon Associates referral tag on every Amazon page.",
-  "permissions": ["storage", "declarativeNetRequest"],
+  "permissions": ["declarativeNetRequest"],
   "host_permissions": ["*://*.amazon.com/*"],
-  "action": {
-    "default_popup": "popup.html",
-    "default_title": "Amazon Referral Tag",
-    "default_icon": {
-      "16": "icon16.png",
-      "48": "icon48.png",
-      "128": "icon128.png"
-    }
-  },
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
   "declarative_net_request": {
-    "rule_resources": []
+    "rule_resources": [
+      {
+        "id": "main_rules",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
   }
 }

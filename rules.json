@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "redirect",
+      "redirect": {
+        "transform": {
+          "queryTransform": {
+            "addOrReplaceParams": [
+              { "key": "tag", "value": "fordham-20" }
+            ]
+          }
+        }
+      }
+    },
+    "condition": {
+      "requestDomains": ["amazon.com"],
+      "resourceTypes": ["main_frame"]
+    }
+  }
+]
