@@ -5,78 +5,120 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Amazon Search">
+  <meta name="apple-mobile-web-app-title" content="Fordham Prep Shop">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon.svg">
-  <title>Amazon Search</title>
+  <title>Fordham Prep Shop</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --burgundy: #6B0F1A;
+      --burgundy-dark: #4a0a12;
+      --burgundy-light: #8c1422;
+      --gold: #C9A84C;
+      --gold-light: #e8c86a;
+      --cream: #fdf8f0;
+      --text-light: #f5e6e8;
+      --text-muted: #c9a0a8;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #131921;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: var(--burgundy-dark);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
     }
 
+    /* ── Header ── */
     header {
-      width: 100%;
-      background: #131921;
-      padding: 12px 20px;
+      background: var(--burgundy);
+      border-bottom: 3px solid var(--gold);
+      padding: 14px 32px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      border-bottom: 1px solid #3a4553;
+      gap: 16px;
     }
 
-    .logo {
+    .header-crest {
       font-size: 28px;
-      font-weight: bold;
-      color: #FF9900;
-      letter-spacing: -1px;
+      line-height: 1;
     }
 
+    .header-text h1 {
+      font-size: 22px;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .header-text p {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── Main layout ── */
     main {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 0;
+      max-width: 1200px;
       width: 100%;
-      max-width: 700px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      align-items: start;
     }
 
-    .tagline {
-      color: #ccc;
-      font-size: 14px;
+    /* ── Left panel ── */
+    .left-panel {
+      padding-right: 32px;
+      position: sticky;
+      top: 32px;
+    }
+
+    .left-panel h2 {
+      color: var(--gold);
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .left-panel p {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
       margin-bottom: 24px;
-      text-align: center;
     }
 
     .search-form {
       display: flex;
-      width: 100%;
-      border-radius: 4px;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      border: 1px solid var(--gold);
     }
 
     .search-input {
       flex: 1;
-      padding: 14px 16px;
-      font-size: 16px;
+      padding: 13px 16px;
+      font-size: 15px;
       border: none;
       outline: none;
-      background: #fff;
+      background: var(--cream);
+      font-family: Arial, sans-serif;
+      color: #222;
     }
 
     .search-btn {
-      background: #FF9900;
+      background: var(--gold);
       border: none;
-      padding: 0 20px;
+      padding: 0 18px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -84,17 +126,114 @@
       transition: background 0.15s;
     }
 
-    .search-btn:hover { background: #e68a00; }
+    .search-btn:hover { background: var(--gold-light); }
 
     .search-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
     }
 
+    .divider {
+      border: none;
+      border-top: 1px solid var(--burgundy-light);
+      margin: 28px 0;
+    }
+
+    .left-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ── Right panel ── */
+    .right-panel h2 {
+      color: var(--gold);
+      font-size: 15px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--burgundy-light);
+    }
+
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    .item-card {
+      background: var(--cream);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .item-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+
+    .item-icon {
+      background: var(--burgundy);
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+    }
+
+    .item-body {
+      padding: 12px;
+    }
+
+    .item-body h3 {
+      font-size: 13px;
+      color: #2c1810;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .item-body p {
+      font-size: 11px;
+      color: #666;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .item-btn {
+      display: block;
+      width: 100%;
+      padding: 7px;
+      background: var(--gold);
+      color: var(--burgundy-dark);
+      font-size: 11px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .item-btn:hover { background: var(--gold-light); }
+
+    /* ── Popup ── */
     .popup-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.75);
+      background: rgba(0,0,0,0.8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -105,25 +244,30 @@
     .popup-overlay.hidden { display: none; }
 
     .popup {
-      background: #fff;
-      border-radius: 8px;
-      padding: 32px 28px;
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 36px 32px;
       width: 100%;
       max-width: 400px;
       text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+      border-top: 5px solid var(--gold);
     }
+
+    .popup .crest { font-size: 40px; margin-bottom: 12px; }
 
     .popup h2 {
       font-size: 20px;
-      margin-bottom: 8px;
-      color: #131921;
+      color: var(--burgundy);
+      margin-bottom: 6px;
     }
 
     .popup p {
-      font-size: 14px;
+      font-size: 13px;
       color: #555;
-      margin-bottom: 20px;
+      font-family: Arial, sans-serif;
+      margin-bottom: 22px;
+      line-height: 1.5;
     }
 
     .popup input {
@@ -131,41 +275,59 @@
       padding: 12px 14px;
       font-size: 15px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-bottom: 16px;
+      border-radius: 5px;
+      margin-bottom: 12px;
       outline: none;
+      font-family: Arial, sans-serif;
     }
 
-    .popup input:focus { border-color: #FF9900; }
+    .popup input:focus { border-color: var(--burgundy); }
 
     .popup button {
       width: 100%;
-      padding: 12px;
-      background: #FF9900;
-      color: #131921;
-      font-size: 16px;
+      padding: 13px;
+      background: var(--burgundy);
+      color: var(--gold);
+      font-size: 15px;
       font-weight: bold;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.5px;
     }
 
-    .popup button:hover { background: #e68a00; }
+    .popup button:hover { background: var(--burgundy-light); }
 
     .popup .error {
       color: #c0392b;
-      font-size: 13px;
-      margin-top: -8px;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
       margin-bottom: 12px;
       display: none;
     }
 
+    /* ── Footer ── */
     footer {
-      width: 100%;
       text-align: center;
       padding: 16px;
-      color: #555;
-      font-size: 12px;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: Arial, sans-serif;
+      border-top: 1px solid var(--burgundy-light);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 680px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 20px 16px;
+      }
+      .left-panel {
+        padding-right: 0;
+        position: static;
+        margin-bottom: 28px;
+      }
     }
   </style>
 </head>
@@ -177,10 +339,25 @@
   const CONFIG = {
     demo: true,
     referralTag: "",
-    companyName: "Amazon Search",
-    primaryColor: "#FF9900"
+    companyName: "Fordham Prep Shop",
+    primaryColor: "#6B0F1A"
   };
   // ────────────────────────────────────────────────────────────────────────────
+
+  const FEATURED_ITEMS = [
+    { icon: "🖩", name: "TI-84 Plus Calculator", desc: "Graphing calculator for math & science", query: "TI-84 Plus graphing calculator" },
+    { icon: "📓", name: "Spiral Notebooks", desc: "College-ruled, 5-subject packs", query: "spiral notebooks college ruled 5 subject" },
+    { icon: "🎒", name: "School Backpack", desc: "Durable, laptop-ready backpack", query: "school backpack with laptop compartment" },
+    { icon: "🖊️", name: "Blue & Black Pens", desc: "Ballpoint pen packs for class", query: "ballpoint pens blue black pack" },
+    { icon: "🟡", name: "Highlighter Set", desc: "Multi-color study highlighters", query: "highlighter set assorted colors" },
+    { icon: "📁", name: "3-Ring Binders", desc: "1 & 2 inch binders for notes", query: "3 ring binders school" },
+    { icon: "🗒️", name: "Sticky Notes", desc: "Post-it notes, assorted sizes", query: "sticky notes post-it assorted" },
+    { icon: "✏️", name: "Mechanical Pencils", desc: "0.5mm & 0.7mm with lead refills", query: "mechanical pencils 0.5mm with refills" },
+    { icon: "🖥️", name: "Laptop Stand", desc: "Adjustable ergonomic desk stand", query: "adjustable laptop stand ergonomic" },
+    { icon: "🔌", name: "USB-C Hub", desc: "Multi-port adapter for Chromebook/Mac", query: "USB-C hub multiport adapter" },
+    { icon: "🗂️", name: "Desk Organizer", desc: "Keep your workspace tidy", query: "desk organizer office supplies" },
+    { icon: "📐", name: "Geometry Set", desc: "Ruler, compass, protractor kit", query: "geometry set ruler compass protractor" },
+  ];
 
   function getTag() {
     if (!CONFIG.demo) return CONFIG.referralTag;
@@ -190,57 +367,87 @@
   function needsPopup() {
     return CONFIG.demo && !localStorage.getItem("referralTag");
   }
+
+  function buildAmazonUrl(query) {
+    const tag = getTag();
+    return "https://www.amazon.com/s?k=" + encodeURIComponent(query) +
+      (tag ? "&tag=" + encodeURIComponent(tag) : "");
+  }
 </script>
 
+<!-- Demo popup -->
 <div class="popup-overlay" id="popup-overlay">
   <div class="popup">
-    <h2>Welcome</h2>
-    <p>Enter your Amazon Associates referral tag to get started.</p>
-    <input type="text" id="tag-input" placeholder="e.g. yourname-20" autocomplete="off">
-    <div class="error" id="tag-error">Please enter a valid tag (e.g. yourname-20)</div>
-    <button onclick="saveTag()">Start Shopping</button>
+    <div class="crest">⚜️</div>
+    <h2>Fordham Prep Shop</h2>
+    <p>Enter your Amazon Associates referral tag to get started. Every purchase supports the program.</p>
+    <input type="text" id="tag-input" placeholder="e.g. fordhamprep-20" autocomplete="off">
+    <div class="error" id="tag-error">Please enter a valid tag (e.g. fordhamprep-20)</div>
+    <button onclick="saveTag()">Enter Shop</button>
   </div>
 </div>
 
 <header>
-  <div class="logo" id="logo">amazon search</div>
+  <div class="header-crest">⚜️</div>
+  <div class="header-text">
+    <h1>Fordham Prep Shop</h1>
+    <p>Shop Amazon &mdash; Support the Program</p>
+  </div>
 </header>
 
 <main>
-  <p class="tagline" id="tagline">Search Amazon — referral link applied automatically</p>
-  <form class="search-form" onsubmit="doSearch(event)">
-    <input class="search-input" type="text" id="search-input"
-           placeholder="Search Amazon..." autocomplete="off" autofocus>
-    <button class="search-btn" type="submit" aria-label="Search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#131921" stroke-width="2.5" stroke-linecap="round">
-        <circle cx="11" cy="11" r="6"/>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-    </button>
-  </form>
+  <!-- Left: Search -->
+  <div class="left-panel">
+    <h2>Search Amazon</h2>
+    <p>Search for anything on Amazon. Your referral tag is applied automatically to every link.</p>
+    <form class="search-form" onsubmit="doSearch(event)">
+      <input class="search-input" type="text" id="search-input"
+             placeholder="Search Amazon..." autocomplete="off" autofocus>
+      <button class="search-btn" type="submit" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4a0a12" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="11" cy="11" r="6"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+    </form>
+    <hr class="divider">
+    <p class="left-note">Purchases made through this shop generate a small commission at no extra cost to you.</p>
+  </div>
+
+  <!-- Right: Featured items -->
+  <div class="right-panel">
+    <h2>School &amp; Office Essentials</h2>
+    <div class="items-grid" id="items-grid"></div>
+  </div>
 </main>
 
 <footer>
-  As an Amazon Associate, we earn from qualifying purchases.
+  As an Amazon Associate, Fordham Prep earns from qualifying purchases.
 </footer>
 
 <script>
-  // Apply branding
+  // Apply branding meta
   document.title = CONFIG.companyName;
-  document.getElementById("logo").textContent = CONFIG.companyName.toLowerCase();
   document.querySelector('meta[name="apple-mobile-web-app-title"]')
     .setAttribute("content", CONFIG.companyName);
 
-  // Apply primary color overrides
-  const style = document.createElement("style");
-  style.textContent = `
-    .search-btn { background: ${CONFIG.primaryColor} !important; }
-    .search-btn:hover { filter: brightness(0.9); }
-    .logo { color: ${CONFIG.primaryColor} !important; }
-    .popup input:focus { border-color: ${CONFIG.primaryColor} !important; }
-    .popup button { background: ${CONFIG.primaryColor} !important; }
-  `;
-  document.head.appendChild(style);
+  // Render featured items
+  const grid = document.getElementById("items-grid");
+  FEATURED_ITEMS.forEach(function(item) {
+    const a = document.createElement("a");
+    a.className = "item-card";
+    a.href = buildAmazonUrl(item.query);
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.innerHTML =
+      '<div class="item-icon">' + item.icon + '</div>' +
+      '<div class="item-body">' +
+        '<h3>' + item.name + '</h3>' +
+        '<p>' + item.desc + '</p>' +
+        '<div class="item-btn">Shop on Amazon</div>' +
+      '</div>';
+    grid.appendChild(a);
+  });
 
   // Show or hide popup
   const overlay = document.getElementById("popup-overlay");
@@ -256,6 +463,23 @@
     errorEl.style.display = "none";
     localStorage.setItem("referralTag", val);
     overlay.classList.add("hidden");
+    // Re-render cards with the new tag
+    grid.innerHTML = "";
+    FEATURED_ITEMS.forEach(function(item) {
+      const a = document.createElement("a");
+      a.className = "item-card";
+      a.href = buildAmazonUrl(item.query);
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.innerHTML =
+        '<div class="item-icon">' + item.icon + '</div>' +
+        '<div class="item-body">' +
+          '<h3>' + item.name + '</h3>' +
+          '<p>' + item.desc + '</p>' +
+          '<div class="item-btn">Shop on Amazon</div>' +
+        '</div>';
+      grid.appendChild(a);
+    });
     document.getElementById("search-input").focus();
   }
 
@@ -267,11 +491,7 @@
     e.preventDefault();
     const query = document.getElementById("search-input").value.trim();
     if (!query) return;
-    const tag = getTag();
-    const url = "https://www.amazon.com/s?" +
-      "k=" + encodeURIComponent(query) +
-      (tag ? "&tag=" + encodeURIComponent(tag) : "");
-    window.location.href = url;
+    window.location.href = buildAmazonUrl(query);
   }
 </script>
 
