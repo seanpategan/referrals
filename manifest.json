@@ -1,16 +1,28 @@
 {
-  "name": "Amazon Search",
-  "short_name": "AmazonSearch",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#131921",
-  "theme_color": "#FF9900",
-  "icons": [
-    {
-      "src": "icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+  "manifest_version": 3,
+  "name": "Amazon Referral Tag",
+  "version": "1.0",
+  "description": "Automatically applies your Amazon Associates referral tag on every Amazon page.",
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["*://*.amazon.com/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Amazon Referral Tag",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
-  ]
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "declarative_net_request": {
+    "rule_resources": []
+  }
 }
