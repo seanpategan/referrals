@@ -13,46 +13,42 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --burgundy: #6B0F1A;
-      --burgundy-dark: #4a0a12;
-      --burgundy-light: #8c1422;
-      --gold: #C9A84C;
-      --gold-light: #e8c86a;
-      --cream: #fdf8f0;
-      --text-light: #f5e6e8;
-      --text-muted: #c9a0a8;
+      --burgundy:       #6B0F1A;
+      --burgundy-dark:  #3d0710;
+      --burgundy-mid:   #8c1422;
+      --gold:           #C9A84C;
+      --gold-light:     #e0be72;
+      --cream:          #fdf8f0;
+      --text-muted:     #c9a0a8;
     }
 
     body {
-      font-family: Georgia, 'Times New Roman', serif;
+      font-family: Arial, sans-serif;
       background: var(--burgundy-dark);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* ── Header ── */
+    /* Header */
     header {
       background: var(--burgundy);
       border-bottom: 3px solid var(--gold);
       padding: 14px 32px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .header-crest {
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    .header-text h1 {
+    .header-logo {
+      font-family: Georgia, serif;
       font-size: 22px;
       color: var(--gold);
+      font-weight: bold;
       letter-spacing: 0.5px;
     }
 
-    .header-text p {
+    .header-sub {
       font-size: 11px;
       color: var(--text-muted);
       letter-spacing: 1.5px;
@@ -60,154 +56,194 @@
       margin-top: 2px;
     }
 
-    /* ── Main layout ── */
+    .header-divider {
+      width: 1px;
+      height: 32px;
+      background: var(--burgundy-mid);
+    }
+
+    /* Layout */
     main {
       flex: 1;
       display: grid;
-      grid-template-columns: 320px 1fr;
-      gap: 0;
-      max-width: 1200px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 32px 24px;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 67px);
     }
 
-    /* ── Left panel ── */
-    .left-panel {
-      padding-right: 32px;
-      position: sticky;
-      top: 32px;
+    /* Left: Search panel */
+    .search-panel {
+      background: var(--burgundy);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 48px 52px;
+      border-right: 1px solid var(--burgundy-mid);
     }
 
-    .left-panel h2 {
+    .search-panel h2 {
+      font-family: Georgia, serif;
+      font-size: 28px;
       color: var(--gold);
-      font-size: 15px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      font-weight: normal;
     }
 
-    .left-panel p {
-      color: var(--text-muted);
+    .search-panel p {
       font-size: 13px;
-      font-family: Arial, sans-serif;
+      color: var(--text-muted);
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .search-form {
       display: flex;
       border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-      border: 1px solid var(--gold);
+      border: 2px solid var(--gold);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
     }
 
     .search-input {
       flex: 1;
-      padding: 13px 16px;
-      font-size: 15px;
+      padding: 16px 20px;
+      font-size: 16px;
       border: none;
       outline: none;
       background: var(--cream);
-      font-family: Arial, sans-serif;
       color: #222;
     }
 
     .search-btn {
       background: var(--gold);
       border: none;
-      padding: 0 18px;
+      padding: 0 22px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.15s;
+      flex-shrink: 0;
     }
 
     .search-btn:hover { background: var(--gold-light); }
 
     .search-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
     }
 
-    .divider {
-      border: none;
-      border-top: 1px solid var(--burgundy-light);
-      margin: 28px 0;
-    }
-
-    .left-note {
+    .search-note {
+      margin-top: 18px;
       font-size: 11px;
       color: var(--text-muted);
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
       font-style: italic;
+      line-height: 1.6;
     }
 
-    /* ── Right panel ── */
-    .right-panel h2 {
-      color: var(--gold);
-      font-size: 15px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
+    /* Right: Products panel */
+    .products-panel {
+      background: #f5ede8;
+      padding: 28px 24px;
+      overflow-y: auto;
+    }
+
+    .products-panel h2 {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      color: var(--burgundy);
+      font-weight: bold;
+      margin-bottom: 18px;
       padding-bottom: 10px;
-      border-bottom: 1px solid var(--burgundy-light);
+      border-bottom: 2px solid var(--gold);
+      letter-spacing: 0.3px;
     }
 
     .items-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+      gap: 14px;
     }
 
     .item-card {
-      background: var(--cream);
-      border-radius: 8px;
+      background: #fff;
+      border-radius: 6px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
       transition: transform 0.15s, box-shadow 0.15s;
-      cursor: pointer;
       text-decoration: none;
-      display: block;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e8ddd8;
     }
 
     .item-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
     }
 
-    .item-icon {
-      background: var(--burgundy);
-      height: 100px;
+    .item-img-wrap {
+      background: #f8f8f8;
+      height: 130px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 44px;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+    }
+
+    .item-img-wrap img {
+      max-height: 110px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .item-img-wrap .img-placeholder {
+      width: 64px;
+      height: 64px;
+      background: #e8e0d8;
+      border-radius: 4px;
     }
 
     .item-body {
-      padding: 12px;
+      padding: 10px 10px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .item-body h3 {
-      font-size: 13px;
-      color: #2c1810;
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-      margin-bottom: 4px;
-      line-height: 1.3;
-    }
-
-    .item-body p {
-      font-size: 11px;
-      color: #666;
-      font-family: Arial, sans-serif;
-      margin-bottom: 10px;
+    .item-name {
+      font-size: 12px;
+      color: #111;
+      font-weight: 600;
       line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .item-stars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .review-count {
+      font-size: 10px;
+      color: #0066c0;
+    }
+
+    .item-price {
+      font-size: 14px;
+      color: #B12704;
+      font-weight: 700;
+      margin-bottom: 8px;
+      margin-top: auto;
+      padding-top: 6px;
     }
 
     .item-btn {
@@ -218,18 +254,17 @@
       color: var(--burgundy-dark);
       font-size: 11px;
       font-weight: bold;
-      font-family: Arial, sans-serif;
       text-align: center;
-      border: none;
       border-radius: 4px;
-      cursor: pointer;
-      letter-spacing: 0.5px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .item-btn:hover { background: var(--gold-light); }
+    .item-card:hover .item-btn {
+      background: var(--gold-light);
+    }
 
-    /* ── Popup ── */
+    /* Popup */
     .popup-overlay {
       position: fixed;
       inset: 0;
@@ -254,10 +289,9 @@
       border-top: 5px solid var(--gold);
     }
 
-    .popup .crest { font-size: 40px; margin-bottom: 12px; }
-
     .popup h2 {
-      font-size: 20px;
+      font-family: Georgia, serif;
+      font-size: 22px;
       color: var(--burgundy);
       margin-bottom: 6px;
     }
@@ -265,9 +299,8 @@
     .popup p {
       font-size: 13px;
       color: #555;
-      font-family: Arial, sans-serif;
-      margin-bottom: 22px;
-      line-height: 1.5;
+      margin-bottom: 24px;
+      line-height: 1.6;
     }
 
     .popup input {
@@ -278,7 +311,6 @@
       border-radius: 5px;
       margin-bottom: 12px;
       outline: none;
-      font-family: Arial, sans-serif;
     }
 
     .popup input:focus { border-color: var(--burgundy); }
@@ -293,41 +325,31 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-family: Arial, sans-serif;
       letter-spacing: 0.5px;
     }
 
-    .popup button:hover { background: var(--burgundy-light); }
+    .popup button:hover { background: var(--burgundy-mid); }
 
     .popup .error {
       color: #c0392b;
       font-size: 12px;
-      font-family: Arial, sans-serif;
       margin-bottom: 12px;
       display: none;
     }
 
-    /* ── Footer ── */
     footer {
       text-align: center;
-      padding: 16px;
+      padding: 12px;
       color: var(--text-muted);
       font-size: 11px;
-      font-family: Arial, sans-serif;
-      border-top: 1px solid var(--burgundy-light);
+      background: var(--burgundy-dark);
+      border-top: 1px solid var(--burgundy);
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 680px) {
-      main {
-        grid-template-columns: 1fr;
-        padding: 20px 16px;
-      }
-      .left-panel {
-        padding-right: 0;
-        position: static;
-        margin-bottom: 28px;
-      }
+    @media (max-width: 720px) {
+      main { grid-template-columns: 1fr; min-height: auto; }
+      .search-panel { padding: 32px 20px; justify-content: flex-start; }
+      .products-panel { padding: 20px 16px; }
     }
   </style>
 </head>
@@ -345,18 +367,18 @@
   // ────────────────────────────────────────────────────────────────────────────
 
   const FEATURED_ITEMS = [
-    { icon: "🖩", name: "TI-84 Plus Calculator", desc: "Graphing calculator for math & science", query: "TI-84 Plus graphing calculator" },
-    { icon: "📓", name: "Spiral Notebooks", desc: "College-ruled, 5-subject packs", query: "spiral notebooks college ruled 5 subject" },
-    { icon: "🎒", name: "School Backpack", desc: "Durable, laptop-ready backpack", query: "school backpack with laptop compartment" },
-    { icon: "🖊️", name: "Blue & Black Pens", desc: "Ballpoint pen packs for class", query: "ballpoint pens blue black pack" },
-    { icon: "🟡", name: "Highlighter Set", desc: "Multi-color study highlighters", query: "highlighter set assorted colors" },
-    { icon: "📁", name: "3-Ring Binders", desc: "1 & 2 inch binders for notes", query: "3 ring binders school" },
-    { icon: "🗒️", name: "Sticky Notes", desc: "Post-it notes, assorted sizes", query: "sticky notes post-it assorted" },
-    { icon: "✏️", name: "Mechanical Pencils", desc: "0.5mm & 0.7mm with lead refills", query: "mechanical pencils 0.5mm with refills" },
-    { icon: "🖥️", name: "Laptop Stand", desc: "Adjustable ergonomic desk stand", query: "adjustable laptop stand ergonomic" },
-    { icon: "🔌", name: "USB-C Hub", desc: "Multi-port adapter for Chromebook/Mac", query: "USB-C hub multiport adapter" },
-    { icon: "🗂️", name: "Desk Organizer", desc: "Keep your workspace tidy", query: "desk organizer office supplies" },
-    { icon: "📐", name: "Geometry Set", desc: "Ruler, compass, protractor kit", query: "geometry set ruler compass protractor" },
+    { asin: "B00TFYYWQA", name: "TI-84 Plus CE Graphing Calculator", price: "$129.00", stars: 4.8, reviews: "12,483" },
+    { asin: "B00006JNHV", name: "Pilot G2 Premium Pens, 12-Pack", price: "$11.49", stars: 4.7, reviews: "34,201" },
+    { asin: "B001DYFISG", name: "JanSport SuperBreak Backpack", price: "$39.99", stars: 4.7, reviews: "28,750" },
+    { asin: "B000078BQP", name: "Post-it Notes, 12-Pack, 3x3 in.", price: "$7.98", stars: 4.8, reviews: "19,342" },
+    { asin: "B000I46INA", name: "Sharpie Highlighters, 8-Count", price: "$5.99", stars: 4.7, reviews: "22,100" },
+    { asin: "B00006IE6K", name: "Mead Five Star 5-Subject Notebook", price: "$12.49", stars: 4.6, reviews: "9,871" },
+    { asin: "B0000UB7UY", name: "Pentel GraphGear Mechanical Pencil", price: "$9.49", stars: 4.7, reviews: "7,654" },
+    { asin: "B07TVGDDKQ", name: "UGREEN USB-C Hub, 6-in-1", price: "$29.99", stars: 4.5, reviews: "15,230" },
+    { asin: "B08P2HCL3W", name: "Nulaxy Adjustable Laptop Stand", price: "$35.99", stars: 4.6, reviews: "11,432" },
+    { asin: "B002CVUHFU", name: "Mead Composition Notebooks, 6-Pack", price: "$14.99", stars: 4.6, reviews: "6,912" },
+    { asin: "B009RXU59E", name: "SimpleHouseware Desk Organizer", price: "$19.99", stars: 4.5, reviews: "8,341" },
+    { asin: "B001B0GBAW", name: "Staedtler Geometry Set, 10-Piece", price: "$8.99", stars: 4.6, reviews: "4,210" },
   ];
 
   function getTag() {
@@ -368,19 +390,36 @@
     return CONFIG.demo && !localStorage.getItem("referralTag");
   }
 
-  function buildAmazonUrl(query) {
+  function buildAmazonUrl(asin) {
+    const tag = getTag();
+    return "https://www.amazon.com/dp/" + asin +
+      (tag ? "?tag=" + encodeURIComponent(tag) : "");
+  }
+
+  function buildSearchUrl(query) {
     const tag = getTag();
     return "https://www.amazon.com/s?k=" + encodeURIComponent(query) +
       (tag ? "&tag=" + encodeURIComponent(tag) : "");
+  }
+
+  function imgUrl(asin) {
+    return "https://ws-na.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=" +
+      asin + "&Format=_SL300_&ID=AsinImage&MarketPlace=US&ServiceVersion=20070822&WS=1";
+  }
+
+  function renderStars(rating) {
+    const full = Math.floor(rating);
+    const half = rating % 1 >= 0.5 ? 1 : 0;
+    const empty = 5 - full - half;
+    return "&#9733;".repeat(full) + (half ? "&#9734;" : "") + "&#9734;".repeat(empty);
   }
 </script>
 
 <!-- Demo popup -->
 <div class="popup-overlay" id="popup-overlay">
   <div class="popup">
-    <div class="crest">⚜️</div>
     <h2>Fordham Prep Shop</h2>
-    <p>Enter your Amazon Associates referral tag to get started. Every purchase supports the program.</p>
+    <p>Enter your Amazon Associates referral tag to get started. Every purchase earns a commission for the program.</p>
     <input type="text" id="tag-input" placeholder="e.g. fordhamprep-20" autocomplete="off">
     <div class="error" id="tag-error">Please enter a valid tag (e.g. fordhamprep-20)</div>
     <button onclick="saveTag()">Enter Shop</button>
@@ -388,35 +427,31 @@
 </div>
 
 <header>
-  <div class="header-crest">⚜️</div>
-  <div class="header-text">
-    <h1>Fordham Prep Shop</h1>
-    <p>Shop Amazon &mdash; Support the Program</p>
+  <div>
+    <div class="header-logo">Fordham Prep Shop</div>
+    <div class="header-sub">Shop Amazon - Support the Program</div>
   </div>
 </header>
 
 <main>
-  <!-- Left: Search -->
-  <div class="left-panel">
+  <div class="search-panel">
     <h2>Search Amazon</h2>
-    <p>Search for anything on Amazon. Your referral tag is applied automatically to every link.</p>
+    <p>Search for anything on Amazon. Your referral tag is applied to every link automatically.</p>
     <form class="search-form" onsubmit="doSearch(event)">
       <input class="search-input" type="text" id="search-input"
              placeholder="Search Amazon..." autocomplete="off" autofocus>
       <button class="search-btn" type="submit" aria-label="Search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#4a0a12" stroke-width="2.5" stroke-linecap="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3d0710" stroke-width="2.5" stroke-linecap="round">
           <circle cx="11" cy="11" r="6"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
       </button>
     </form>
-    <hr class="divider">
-    <p class="left-note">Purchases made through this shop generate a small commission at no extra cost to you.</p>
+    <p class="search-note">Purchases made through this shop generate a small commission at no extra cost to you.</p>
   </div>
 
-  <!-- Right: Featured items -->
-  <div class="right-panel">
-    <h2>School &amp; Office Essentials</h2>
+  <div class="products-panel">
+    <h2>School and Office Essentials</h2>
     <div class="items-grid" id="items-grid"></div>
   </div>
 </main>
@@ -426,30 +461,48 @@
 </footer>
 
 <script>
-  // Apply branding meta
   document.title = CONFIG.companyName;
   document.querySelector('meta[name="apple-mobile-web-app-title"]')
     .setAttribute("content", CONFIG.companyName);
 
-  // Render featured items
-  const grid = document.getElementById("items-grid");
-  FEATURED_ITEMS.forEach(function(item) {
-    const a = document.createElement("a");
-    a.className = "item-card";
-    a.href = buildAmazonUrl(item.query);
-    a.target = "_blank";
-    a.rel = "noopener";
-    a.innerHTML =
-      '<div class="item-icon">' + item.icon + '</div>' +
-      '<div class="item-body">' +
-        '<h3>' + item.name + '</h3>' +
-        '<p>' + item.desc + '</p>' +
-        '<div class="item-btn">Shop on Amazon</div>' +
-      '</div>';
-    grid.appendChild(a);
-  });
+  function buildCards() {
+    const grid = document.getElementById("items-grid");
+    grid.innerHTML = "";
+    FEATURED_ITEMS.forEach(function(item) {
+      const a = document.createElement("a");
+      a.className = "item-card";
+      a.href = buildAmazonUrl(item.asin);
+      a.target = "_blank";
+      a.rel = "noopener";
 
-  // Show or hide popup
+      const img = new Image();
+      img.alt = item.name;
+      img.onload = function() { imgWrap.innerHTML = ""; imgWrap.appendChild(img); };
+      img.onerror = function() { imgWrap.innerHTML = '<div class="img-placeholder"></div>'; };
+      img.src = imgUrl(item.asin);
+
+      const imgWrap = document.createElement("div");
+      imgWrap.className = "item-img-wrap";
+      imgWrap.innerHTML = '<div class="img-placeholder"></div>';
+
+      a.innerHTML =
+        '<div class="item-body">' +
+          '<div class="item-name">' + item.name + '</div>' +
+          '<div class="item-stars">' +
+            '<span class="stars">' + renderStars(item.stars) + '</span>' +
+            '<span class="review-count">(' + item.reviews + ')</span>' +
+          '</div>' +
+          '<div class="item-price">' + item.price + '</div>' +
+          '<div class="item-btn">View on Amazon</div>' +
+        '</div>';
+
+      a.insertBefore(imgWrap, a.firstChild);
+      grid.appendChild(a);
+    });
+  }
+
+  buildCards();
+
   const overlay = document.getElementById("popup-overlay");
   if (!needsPopup()) overlay.classList.add("hidden");
 
@@ -463,23 +516,7 @@
     errorEl.style.display = "none";
     localStorage.setItem("referralTag", val);
     overlay.classList.add("hidden");
-    // Re-render cards with the new tag
-    grid.innerHTML = "";
-    FEATURED_ITEMS.forEach(function(item) {
-      const a = document.createElement("a");
-      a.className = "item-card";
-      a.href = buildAmazonUrl(item.query);
-      a.target = "_blank";
-      a.rel = "noopener";
-      a.innerHTML =
-        '<div class="item-icon">' + item.icon + '</div>' +
-        '<div class="item-body">' +
-          '<h3>' + item.name + '</h3>' +
-          '<p>' + item.desc + '</p>' +
-          '<div class="item-btn">Shop on Amazon</div>' +
-        '</div>';
-      grid.appendChild(a);
-    });
+    buildCards();
     document.getElementById("search-input").focus();
   }
 
@@ -491,7 +528,7 @@
     e.preventDefault();
     const query = document.getElementById("search-input").value.trim();
     if (!query) return;
-    window.location.href = buildAmazonUrl(query);
+    window.location.href = buildSearchUrl(query);
   }
 </script>
 
