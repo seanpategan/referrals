@@ -1,30 +1,23 @@
-# Amazon Referral Web App
+# Amazon Referral Tag - Chrome Extension
 
-A lightweight web app that lets you search Amazon with your referral tag automatically applied. Pin it to your phone's homescreen for instant access.
+A minimal Chrome extension that automatically applies an Amazon Associates referral tag to every Amazon page you visit.
 
 ## How it works
 
-Type a search query, hit enter, and you land on Amazon's results page with your Associates tag already in the URL.
+When you navigate to any Amazon page, the extension silently adds `?tag=fordham-20` to the URL. No clicks, no setup, no visible changes.
 
-**Demo mode** prompts for a referral tag on first visit and remembers it. **Company mode** has the tag hardcoded: no prompt, just search.
+## Installation
 
-## Files
+1. Go to `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked** and select this folder
 
-- **`index.html`**: the entire app. Edit the `CONFIG` block at the top to switch between demo and company mode, set your referral tag, and customize branding.
-- **`manifest.json`**: enables "Add to Home Screen" on iOS and Android so the app opens like a native app.
-- **`icon.svg`**: the homescreen icon.
+## Customization
 
-## Creating a company build
+To change the referral tag, edit the `value` field in `rules.json`:
 
-In `index.html`, update the config at the top:
-
-```js
-const CONFIG = {
-  demo: false,           // removes the setup popup
-  referralTag: "yourtag-20",
-  companyName: "Acme Shop",
-  primaryColor: "#FF9900"
-};
+```json
+{ "key": "tag", "value": "your-tag-here" }
 ```
 
-Then host the three files anywhere (GitHub Pages, Netlify, etc.).
+Then reload the extension in `chrome://extensions`.
